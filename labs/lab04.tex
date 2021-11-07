@@ -1,0 +1,228 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Lab 04},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Lab 04}
+    \author{}
+    \date{}
+  
+
+% change section title styling
+\usepackage{sectsty}
+\sectionfont{\normalsize\normalfont\itshape}
+\subsectionfont{\normalsize\normalfont}
+
+% use fancyhdr style
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LO, LE]{Lab 04}
+\fancyhead[RO, RE]{GEOG 491/891}
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\vspace*{-1cm}\setlength{\parindent}{0pt}
+\begin{flushleft}
+  \@author
+  
+  \@date
+  
+\end{flushleft}\egroup
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\hypertarget{lab-04-making-static-maps}{%
+\section{Lab 04: Making static maps}\label{lab-04-making-static-maps}}
+
+\hypertarget{read-the-instructions-completely-before-starting-the-lab}{%
+\subsubsection{Read the instructions COMPLETELY before starting the
+lab}\label{read-the-instructions-completely-before-starting-the-lab}}
+
+This lab builds on many of the discussions and exercises from class,
+including the ``frankenmap'' exercise from class.
+
+\hypertarget{formatting-your-submission}{%
+\subsubsection{Formatting your
+submission}\label{formatting-your-submission}}
+
+This lab must be placed into a public repository on GitHub
+(www.github.com). Before the due date, submit \textbf{on Canvas} a link
+to the repository. I will then download your repositories and run your
+code. The code must be contained in either a .R script or a .Rmd
+markdown document. As I need to run your code, any data you use in the
+lab must be referenced using \textbf{relative path names}. Finally,
+answers to questions I pose in this document must also be in the
+repository at the time you submit your link to Canvas. They can be in a
+separate text file, or if you decide to use an RMarkdown document, you
+can answer them directly in the doc.
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+This lab is much more free-form than previous assignments. You will be
+completing your own version of the in-class ``frankenmap'' using proper
+cartographic principles. I encourage you to use whatever resources you
+find useful, including the relevant sections of the Lovelace chapter and
+online resources such as:
+\url{https://mgimond.github.io/Spatial/good-map-making-tips.html}
+
+\hypertarget{your-tasks}{%
+\subsection{Your tasks}\label{your-tasks}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using the same descriptions as the in-class frankenmap, create a map
+  that follows ``good'' cartographic principles. I have included the
+  instructions below for reference.
+\end{enumerate}
+
+Original description:
+
+\begin{itemize}
+\tightlist
+\item
+  State data frame:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nebraska counties, symbolized (filled) by some variable of interest
+  \item
+    Borders between counties symbolized using something other than the
+    defaults
+  \item
+    A scale bar
+  \end{itemize}
+\item
+  County data frame:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Municipal boundaries within Lancaster County, with labels for names
+  \item
+    State parks in Lancaster County, symbolized using a non-default
+    symbol
+  \item
+    303d streams in Lancaster County, symbolized differently by
+    ``impairment''
+  \item
+    Use the DEM to plot elevation behind a semi-transparent Lancaster
+    County (I have placed a new DEM in the repo's data folder)
+  \end{itemize}
+\item
+  Putting it together
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Put the state map as an inset to the county map
+  \item
+    A north arrow
+  \item
+    A title
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Make a second static map of your choosing. You may choose any spatial
+  extent, domain, or technique. I'm looking for creativity, good coding
+  practices (including comments), and for you to demonstrate independent
+  thinking. There are minor restrictions you must follow:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    It must include vector AND raster data in some manner
+  \item
+    It must include spatial data relating to a social process (e.g.,
+    political boundaries) AND spatial data relating to an environmental
+    process (e.g., water resources)
+  \item
+    The map should ``stand on its own'' and communicate its purpose
+    without additional text
+  \item
+    That's it!
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{questions}{%
+\subsection{Questions:}\label{questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Describe your choices in making map 1
+\item
+  Describe your choices in making map 2. Include why you chose the
+  problem and where you obtained your data. Finally, your map is a
+  communication piece. What was the intent of your communication and do
+  you feel as though you achieved your goal?
+\item
+  What did you learn?
+\end{enumerate}
+
+
+\end{document}
